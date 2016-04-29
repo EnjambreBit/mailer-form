@@ -12,12 +12,13 @@ app.post('/sendMail', function(req, res) {
   var sendgrid = require("sendgrid")(apiKey);
   var email = new sendgrid.Email();
 
-  email.addTo("hugoruscitti@gmail.com");
+  email.addTo("contacto@enjambrebit.com.ar");
   email.setFrom("hugoruscitti@gmail.com");
 
-  email.setSubject("CONTACTO WEB: " + req.body.subject);
+  email.setSubject("MailerForm: " + req.body.subject);
   email.setHtml("Emisor: " + req.body.email + "<p>" +
-                "Mensaje: " + "<p><pre>" + req.body.message + "</pre>");
+                "Mensaje: " + "<p><pre>" + req.body.message + "</pre>" +
+                "<small>Este mensaje ha llegado por medio del formulario de contacto de la web.</small>");
 
   sendgrid.send(email);
 
