@@ -3,183 +3,61 @@
 <head>
   <meta charset="UTF-8">
   <title>MailerForm</title>
+  <link rel="stylesheet" href="style.css">
+  <script type="text/javascript" src="validate.min.js"></script>
 </head>
+
 <body>
 
-<style>
+  <form class="forms" name="contactForm" action="sendMail" method="post">
+    <fieldset>
+      <ol>
+        <li class="form-row text-input-row name-field">
+          <input type="text" name="name" class="text-input defaultText required defaultTextActive" placeholder="Nombre (necesario)">
+        </li>
+        <li class="form-row text-input-row email-field">
+          <input type="text" name="email" class="text-input defaultText required email defaultTextActive" placeholder="Email (necesario)">
+        </li>
+        <li class="form-row text-input-row subject-field">
+          <input type="text" name="subject" class="text-input defaultText defaultTextActive" placeholder="Asunto">
+        </li>
+        <li class="form-row text-area-row">
+          <textarea name="message" placeholder="..." class="text-area required"></textarea>
+        </li>
+        <li class="form-row hidden-row">
+          <input type="hidden" name="hidden" value="">
+        </li>
+
+        <li class="button-row">
+          <input type="submit" value="Envíar" name="submit" class="btn btn-submit bm0">
+        </li>
+      </ol>
+    </fieldset>
+
+    <div id="errorArea" class="errorArea"></div>
+  </form>
 
 
+  <script>
+    var validator = new FormValidator('contactForm', [
+      {name: 'name', display: 'Nombre', rules: 'required'},
+      {name: 'message', display: 'Mensaje', rules: 'required'},
+      {name: 'email', display: 'email', rules: 'required|valid_email'}
+    ], function(errors, event) {
+      console.log(errors);
+      
+      if (errors.length > 0) {
+        var errorString = '';
 
-select, textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input {
-  display: inline-block;
-  -webkit-font-smoothing: antialiased;
-  -webkit-text-size-adjust: 100%;
-  height: 50px;
-  padding: 5px 15px;
-  margin-bottom: 15px;
-  font-size: 15px;
-  line-height: 1;
-  color: #656565;
-  resize: none;
-  vertical-align: middle;
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
-  box-shadow: none;
-  border: none;
-  background: #e4e4e4;
-  -webkit-border-radius: 0;
-  border-radius: 0;
-  -webkit-transition: all 200ms ease-in;
-  -o-transition: all 200ms ease-in;
-  -moz-transition: all 200ms ease-in;
-}
+        for (var i=0, errorLength=errors.length; i<errorLength; i++) {
+          errorString += errors[i].message + '<br />';
+        }
 
-textarea {
-  height: 100%;
-  padding: 15px;
-  margin-bottom: 15px;
-  min-height: 250px;
-  resize: vertical;
-}
-
-input, textarea, .uneditable-input {
-  width: 95%;
-}
-
-.btn, .btn-group > .btn, .parallax .btn {
-  background: #dc0000;
-}
-.btn, .btn-group > .btn, .parallax .btn {
-  color: #fff;
-  background: #1abb9c;
-  margin-bottom: 10px;
-  margin-right: 5px;
-  padding: 9px 20px 11px 20px;
-  font-weight: normal;
-  font-size: 13px;
-  text-shadow: none;
-  border: none;
-  text-transform: uppercase;
-  -webkit-transition: all 200ms ease-in;
-  -o-transition: all 200ms ease-in;
-  -moz-transition: all 200ms ease-in;
-  -webkit-border-radius: 3px;
-  border-radius: 3px;
-  -webkit-box-shadow: inset 0 -4px 0 rgba(0,0,0,0.15);
-  -moz-box-shadow: inset 0 -4px 0 rgba(0,0,0,0.15);
-  box-shadow: inset 0 -4px 0 rgba(0,0,0,0.15);
-}
-.btn:first-child {
-}
-.parallax input, .parallax textarea {
-    background: #333;
-    background: rgba(255,255,255,0.15);
-    color: #a1a1a1;
-}
-input[type="file"], input[type="image"], input[type="submit"], input[type="reset"], input[type="button"], input[type="radio"], input[type="checkbox"] {
-    width: auto;
-}
-label, select, button, input[type="button"], input[type="reset"], input[type="submit"], input[type="radio"], input[type="checkbox"] {
-    cursor: pointer;
-}
-button, html input[type="button"], input[type="reset"], input[type="submit"] {
-    cursor: pointer;
-    -webkit-appearance: button;
-}
-.btn-submit {
-    -webkit-font-smoothing: antialiased;
-    -webkit-text-size-adjust: 100%;
-}
-.bm0 {
-    margin-bottom: 0 !important;
-}
-.btn {
-    display: inline-block;
-    padding: 4px 12px;
-    margin-bottom: 0;
-    font-size: 14px;
-    line-height: 20px;
-    color: #333333;
-    text-align: center;
-    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
-    vertical-align: middle;
-    cursor: pointer;
-    background-color: #f5f5f5;
-    background-image: -moz-linear-gradient(top, #ffffff, #e6e6e6);
-    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#e6e6e6));
-    background-image: -webkit-linear-gradient(top, #ffffff, #e6e6e6);
-    background-image: -o-linear-gradient(top, #ffffff, #e6e6e6);
-    background-image: linear-gradient(to bottom, #ffffff, #e6e6e6);
-    background-repeat: repeat-x;
-    border: 1px solid #cccccc;
-    border-color: #e6e6e6 #e6e6e6 #bfbfbf;
-    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-    border-bottom-color: #b3b3b3;
-    -webkit-border-radius: 4px;
-    -moz-border-radius: 4px;
-    border-radius: 4px;
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffe6e6e6', GradientType=0);
-    filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
-    -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
-    -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
-}
-
-
-
-fieldset {
-  border: 0;
-  margin: 0;
-  padding: 0;
-}
-
-ol {
-  margin: 0;
-  padding: 0;
-}
-
-.forms ol li {
-  line-height: auto;
-  list-style: none;
-}
-
-input, textarea {
-  background: rgba(255,255,255,0.15);
-  color: #a1a1a1;
-}
-</style>
-
-
-<form class="forms" action="contact/form-handler.php" method="post">
-                <fieldset>
-                  <ol>
-                    <li class="form-row text-input-row name-field">
-                      <input type="text" name="name" class="text-input defaultText required defaultTextActive" placeholder="Nombre (necesario)">
-                    </li>
-                    <li class="form-row text-input-row email-field">
-                      <input type="text" name="email" class="text-input defaultText required email defaultTextActive" placeholder="Email (necesario)">
-                    </li>
-                    <li class="form-row text-input-row subject-field">
-                      <input type="text" name="subject" class="text-input defaultText defaultTextActive" placeholder="Asunto">
-                    </li>
-                    <li class="form-row text-area-row">
-                      <textarea name="message" placeholder="..." class="text-area required"></textarea>
-                    </li>
-                    <li class="form-row hidden-row">
-                      <input type="hidden" name="hidden" value="">
-                    </li>
-                    <li>
-                    <div class="g-recaptcha" data-sitekey="6LceXhITAAAAAHNJ7cAXwalj0774rk_jBIp5Qq1L"><div><div style="width: 304px; height: 78px;"><iframe src="https://www.google.com/recaptcha/api2/anchor?k=6LceXhITAAAAAHNJ7cAXwalj0774rk_jBIp5Qq1L&amp;co=aHR0cDovL2VuamFtYnJlYml0LmNvbS5hcjo4MA..&amp;hl=es&amp;v=r20160419151547&amp;size=normal&amp;cb=wnrm78d56xcl" title="widget del recaptcha" width="304" height="78" role="presentation" frameborder="0" scrolling="no" name="undefined"></iframe></div><textarea id="g-recaptcha-response" name="g-recaptcha-response" class="g-recaptcha-response" style="width: 250px; height: 40px; border: 1px solid #c1c1c1; margin: 10px 25px; padding: 0px; resize: none;  display: none; "></textarea></div></div>
-                    </li>
-                    <li class="button-row">
-                      <input type="submit" value="Envíar" name="submit" class="btn btn-submit bm0">
-                    </li>
-                  </ol>
-                  <input type="hidden" name="v_error" id="v-error" value="Necesario">
-                  <input type="hidden" name="v_email" id="v-email" value="Ingrese un mail válido">
-                </fieldset>
-              </form>
-
+        var el = document.getElementById("errorArea");
+        el.innerHTML = errorString;
+      }
+    });
+  </script>
 
 </body>
 </html>
