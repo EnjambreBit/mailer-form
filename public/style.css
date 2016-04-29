@@ -32,6 +32,7 @@ textarea {
   min-height: 250px;
   resize: vertical;
   background: #e4e4e4 !important;
+  color: #666666 !important;
 }
 
 input, textarea, .uneditable-input {
