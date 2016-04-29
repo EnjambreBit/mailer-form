@@ -25,5 +25,5 @@ app.post('/sendMail', function(req, res) {
 });
 
 app.listen(5000, function() {
-  console.log('listening on port 5000');
+  console.log('listening on localhost:5000');
 });
