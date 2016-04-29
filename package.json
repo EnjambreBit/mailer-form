@@ -10,7 +10,8 @@
   "license": "ISC",
   "devDependencies": {},
   "dependencies": {
-    "express": "^4.12.4"
+    "express": "^4.12.4",
+    "sendgrid": "^2.0.0"
   },
   "engines": {
     "node": "0.10.38"
