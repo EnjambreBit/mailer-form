@@ -22,7 +22,7 @@
           <input type="text" name="subject" class="text-input defaultText defaultTextActive" placeholder="Asunto">
         </li>
         <li class="form-row text-area-row">
-          <textarea name="message" placeholder="..." class="text-area required"></textarea>
+          <textarea name="message" placeholder="Mensaje" class="text-area required"></textarea>
         </li>
         <li class="form-row hidden-row">
           <input type="hidden" name="hidden" value="">
@@ -39,18 +39,24 @@
 
 
   <script>
+    function translate(text) {
+      return text.replace("The", "El campo").
+                  replace("field must contain a valid email address.", "debe ser una dirección de email válida.").
+                  replace("field is required.", "no puede estár vacío.");
+    }
+
     var validator = new FormValidator('contactForm', [
       {name: 'name', display: 'Nombre', rules: 'required'},
       {name: 'message', display: 'Mensaje', rules: 'required'},
       {name: 'email', display: 'email', rules: 'required|valid_email'}
     ], function(errors, event) {
       console.log(errors);
-      
+
       if (errors.length > 0) {
         var errorString = '';
 
         for (var i=0, errorLength=errors.length; i<errorLength; i++) {
-          errorString += errors[i].message + '<br />';
+          errorString += translate(errors[i].message) + '<br />';
         }
 
         var el = document.getElementById("errorArea");

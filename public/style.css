@@ -144,3 +144,8 @@ input, textarea {
   color: red;
   padding-top: 15px;
 }
+
+.mensajeGracias {
+  font-size: 15px;
+  font-family: BlinkMacSystemFont;
+}

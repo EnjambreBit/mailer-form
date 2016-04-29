@@ -5,6 +5,7 @@ var apiKey = process.env.MAIL_API_KEY;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }))
+
 app.use('/', express.static("public"));
 
 app.post('/sendMail', function(req, res) {
@@ -15,13 +16,12 @@ app.post('/sendMail', function(req, res) {
   email.setFrom("hugoruscitti@gmail.com");
 
   email.setSubject("CONTACTO WEB: " + req.body.subject);
-  email.setHtml("Sender: " + req.body.email + "<p>" +
-                "message: " + "<p><pre>" + req.body.message + "</pre>");
+  email.setHtml("Emisor: " + req.body.email + "<p>" +
+                "Mensaje: " + "<p><pre>" + req.body.message + "</pre>");
 
   sendgrid.send(email);
 
-  console.log(req.body);
-  res.end("Gracias!");
+  res.redirect("/gracias.html");
 });
 
 app.listen(5000, function() {
