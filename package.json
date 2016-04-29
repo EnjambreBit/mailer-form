@@ -1,12 +1,12 @@
 {
-  "name": "minimal-express-app",
+  "name": "mailer-form",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
   },
-  "author": "",
+  "author": "Hugo Ruscitti",
   "license": "ISC",
   "devDependencies": {},
   "dependencies": {
