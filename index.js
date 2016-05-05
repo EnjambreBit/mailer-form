@@ -13,7 +13,7 @@ app.post('/sendMail', function(req, res) {
   var email = new sendgrid.Email();
 
   email.addTo("contacto@enjambrebit.com.ar");
-  email.setFrom("hugoruscitti@gmail.com");
+  email.setFrom(req.body.email);
 
   email.setSubject("MailerForm: " + req.body.subject);
   email.setHtml("Emisor: " + req.body.email + "<p>" +
