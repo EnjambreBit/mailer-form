@@ -12,7 +12,7 @@ app.post('/sendMail', function(req, res) {
   var sendgrid = require("sendgrid")(apiKey);
   var email = new sendgrid.Email();
 
-  email.addTo("contacto@sergiodenis.com.ar");
+  email.addTo("contacto@enjambrebit.com.ar");
   email.setFrom(req.body.email);
 
   email.setSubject("MailerForm: " + req.body.subject);
