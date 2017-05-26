@@ -9,33 +9,27 @@
 
 <body>
 
-  <form class="forms" name="contactForm" action="sendMail" method="post">
-    <fieldset>
-      <h1>Formulario de Contacto</h1>
-      <ol>
-        <li class="form-row text-input-row name-field">
-          <input type="text" name="name" class="text-input defaultText required defaultTextActive" placeholder="Nombre (necesario)">
-        </li>
-        <li class="form-row text-input-row email-field">
-          <input type="text" name="email" class="text-input defaultText required email defaultTextActive" placeholder="Email (necesario)">
-        </li>
-        <li class="form-row text-input-row subject-field">
-          <input type="text" name="subject" class="text-input defaultText defaultTextActive" placeholder="Asunto">
-        </li>
-        <li class="form-row text-area-row">
-          <textarea name="message" placeholder="Mensaje" class="text-area required"></textarea>
-        </li>
-        <li class="form-row hidden-row">
-          <input type="hidden" name="hidden" value="">
-        </li>
-
-        <li class="button-row">
-          <input type="submit" value="Enviar" name="submit" class="btn btn-submit bm0">
-        </li>
-      </ol>
-    </fieldset>
-
-    <div id="errorArea" class="errorArea"></div>
+  <form class="ui form" name="contactForm" action="sendMail" method="post">
+      <h4 class="ui dividing header">Formulario de Contacto</h4>
+      <div class="required field">
+        <label>Nombre Completo</label>
+        <input type="text" name="name" placeholder="Nombre (necesario)">
+      </div>
+      <div class="required field">
+        <label>Email</label>
+        <input type="text" name="email" placeholder="Email (necesario)">
+      </div>
+      <div class="field">
+        <label>Asunto</label>
+        <input type="text" name="subject" placeholder="Asunto">
+      </div>
+      <div class="required field">
+        <label>Mensaje</label>
+        <textarea name="message" placeholder="Mensaje" class="text-area required"></textarea>
+      </div>
+        <input type="hidden" name="hidden" value="">
+      <button class="ui primary button" type="submit">Enviar</button>
+    <div class"ui error message" id="errorArea" class="errorArea"></div>
   </form>
 
 
