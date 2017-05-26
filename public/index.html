@@ -3,7 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <title>Sergio Denis - Contacto</title>
-  <link rel="stylesheet" href="style.css">
+  <!-- <link rel="stylesheet" href="style.css"> -->
+  <link rel="stylesheet" type="text/css" href="../semantic/semantic.min.css">
+  <script
+    src="https://code.jquery.com/jquery-3.1.1.min.js"
+    integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+    crossorigin="anonymous"></script>
+  <script src="../semantic/semantic.min.js"></script>
   <script type="text/javascript" src="validate.min.js"></script>
 </head>
 
@@ -37,7 +43,7 @@
     function translate(text) {
       return text.replace("The", "El campo").
                   replace("field must contain a valid email address.", "debe ser una dirección de email válida.").
-                  replace("field is required.", "no puede estár vacío.");
+                  replace("field is required.", "no puede estar vacío.");
     }
 
     var validator = new FormValidator('contactForm', [
